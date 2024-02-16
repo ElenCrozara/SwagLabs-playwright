@@ -1,0 +1,14 @@
+{
+  "name": "swaglabs-playwright",
+  "version": "1.0.0",
+  "description": "Testando um e-commerce",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test" 
+  },
+  "author": "Elen Crozara",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.36.1"
+  }
+}
