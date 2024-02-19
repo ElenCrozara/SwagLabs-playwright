@@ -37,7 +37,7 @@ test.describe('cart test', async () => {
             await page.click('#shopping_cart_container > a');
             await expect(page.url()).toMatch('https://www.saucedemo.com/v1/cart.html');
             await expect(page.getByText('Sauce Labs Backpack')).toBeVisible();
-            await page.getByText('$29.99', { exact: true })
+            await page.getByText('$29.99', { exact: true });
             await page.waitForSelector('a.btn_action.checkout_button');
             await page.click('a.btn_action.checkout_button');
             // await page.dispatchEvent('a.btn_action.checkout_button', 'click');
@@ -56,7 +56,7 @@ test.describe('cart test', async () => {
         await test.step('payments', async () => {
             await expect(page.url()).toMatch('https://www.saucedemo.com/v1/checkout-step-two.html');
             await expect(page.getByText('Sauce Labs Backpack')).toBeVisible();
-            await page.getByText('$29.99', { exact: true })
+            await page.getByText('$29.99', { exact: true });
             await expect(page.getByText('SauceCard #31337')).toBeVisible();
             await expect(page.getByText('32.39')).toBeVisible();
             await page.getByRole('link', { name: 'FINISH' }).click()
@@ -67,6 +67,7 @@ test.describe('cart test', async () => {
     });
     // criar arquivo para testar cart.continue quando o usuário insere o produto no carrinho e 
     // retorna para comprar mais
+    // inserir dados fakes no checkout
 })
 
 
