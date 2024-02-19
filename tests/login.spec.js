@@ -9,9 +9,9 @@ test.describe('login page', async () => {
         await page.locator('#user-name').fill('standard_user')
         await page.locator('#password').fill('secret_sauce')
         await page.locator('#login-button').click()
-        // valida a url da pg do produto após login
+        
         await expect(await page.url()).toBe('https://www.saucedemo.com/v1/inventory.html')
-        // valida o titulo da página
+       
         const productTitle = await page.locator('#inventory_filter_container > div')
         await expect(productTitle).toHaveText('Products')
     });

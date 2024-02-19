@@ -46,4 +46,5 @@ test.describe('products test', async () => {
 
     });
     // criar mais testes para essa página
+    //.cart_cancel_link.btn_secondary // CANCEL
 })
