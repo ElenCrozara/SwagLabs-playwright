@@ -14,6 +14,7 @@ test.describe('login page', async () => {
         await expect(productTitle).toHaveText('Products')
     });
     test('the user inserts wrong credential', async ({ page }) => {
+        
         const loginPage = new LoginPage(page)
 
         await loginPage.loginError()
