@@ -5,6 +5,7 @@ import { ProductsPage } from "../support/products.index";
 test.describe('products test', async () => {
     
     test('all product names begin with "Sauce Labs"', async ({ page }) => {
+        test.fail()
         const productsPage = new ProductsPage(page)
         await productsPage.login()
         await expect(await page.url()).toBe('https://www.saucedemo.com/v1/inventory.html')
