@@ -29,6 +29,7 @@ exports.CartPage = class CartPage {
         await this.page.waitForURL('https://www.saucedemo.com/v1/inventory-item.html?id=4')
         await this.page.locator('//*[contains(text(),"Sauce Labs Backpac")]').isVisible();
         await this.page.getByText('$29.99', { exact: true });
+        // clicando no botão ADD TO CART para adicionar um produto no carrinho
         await this.page.dispatchEvent('.btn_primary.btn_inventory', 'click');
     }
 
@@ -60,5 +61,17 @@ exports.CartPage = class CartPage {
         await expect(this.page.getByText('32.39')).toBeVisible();
         await this.page.getByRole('link', { name: 'FINISH' }).click()
         await expect(this.page.url()).toMatch('https://www.saucedemo.com/v1/checkout-complete.html');
+    }
+
+    async continueShopping() {
+        // clica no carrinho
+        await this.page.waitForSelector('#shopping_cart_container > a');
+        await this.page.click('#shopping_cart_container > a');
+        await expect(this.page.url()).toMatch('https://www.saucedemo.com/v1/cart.html');
+        // clicando no botão CONTINUE SHOPPING
+        await this.page.waitForSelector('a.btn_secondary')
+        await this.page.click('a.btn_secondary')
+        await expect(this.page.url()).toMatch('https://www.saucedemo.com/v1/inventory.html');
+        
     }
 }

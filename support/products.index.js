@@ -22,20 +22,19 @@ exports.ProductsPage = class ProductsPage {
         // guarda o conteúdo dos textos dos produtos (allTextContents)
         const productTitleList = await titleListLocator.allTextContents();
         // loop para validar se todos os itens começam com "Sauce Labs"
-        
         for (const item of productTitleList) {
             await expect(item.startsWith("Sauce Labs")).toBe(true);
-        } 
+        }
     }
 
     async validatingInventory() {
-            // localizou a class que referencia os 6 elementos da lista
-            const inventory = await this.page.locator('.inventory_item_name')
-            // guarda o conteúdo do texto na constante
-            const inventoryListProducts = await inventory.allTextContents()
-            // loop para verificar se o tamanho da lista corresponde a 6 produtos
-            for (const item of inventoryListProducts)
-                await expect(inventoryListProducts.length).toBe(6)
-        }
-
+        // localizou a class que referencia os 6 elementos da lista
+        const inventory = await this.page.locator('.inventory_item_name')
+        // guarda o conteúdo do texto na constante
+        const inventoryListProducts = await inventory.allTextContents()
+        // loop para verificar se o tamanho da lista corresponde a 6 produtos
+        for (const item of inventoryListProducts)
+            await expect(inventoryListProducts.length).toBe(6)
     }
+
+}

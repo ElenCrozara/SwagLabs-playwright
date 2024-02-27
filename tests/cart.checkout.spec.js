@@ -4,7 +4,7 @@ import { CartPage } from "../support/cart.index";
 
 test.describe('cart test', async () => {
 
-    test('add cart product', async ({ page }) => {
+    test('adding product to cart', async ({ page }) => {
         const cartPage = new CartPage(page)
         await cartPage.login()
         await page.waitForURL('https://www.saucedemo.com/v1/inventory.html')
@@ -14,6 +14,18 @@ test.describe('cart test', async () => {
         await cartPage.payments()
 
     });
+
+    test('adding new product', async ({ page }) => {
+        const cartPage = new CartPage(page)
+        await cartPage.login()
+        await page.waitForURL('https://www.saucedemo.com/v1/inventory.html')
+        await cartPage.selectProduct()
+        await cartPage.accessingCart()
+        await cartPage.continueShopping()
+
+
+    })
+
     // criar arquivo para testar cart.continue quando o usuário insere o produto no carrinho e 
     // retorna para comprar mais
     // inserir dados fakes no checkout
