@@ -8,7 +8,6 @@ exports.CartPage = class CartPage {
     constructor(page) {
         this.page = page
 
-
     }
 
     async login() {
@@ -84,4 +83,41 @@ exports.CartPage = class CartPage {
         // clicando no botão ADD TO CART para adicionar um produto no carrinho
         await this.page.dispatchEvent('.btn_primary.btn_inventory', 'click');
     }
+
+    async removeProductCart() {
+        // clica no carrinho
+        await this.page.waitForSelector('#shopping_cart_container > a');
+        await this.page.click('#shopping_cart_container > a');
+        await expect(this.page.url()).toMatch('https://www.saucedemo.com/v1/cart.html');
+        await this.page.waitForSelector('.inventory_item_name');
+
+        // Obter os 2 elementos correspondentes ao locator
+        const items = await this.page.$$('.inventory_item_name');
+        await expect(this.page.getByText('Sauce Labs Backpack')).toBeVisible();
+        // encontra o primeiro botão REMOVE e clica
+        const remove = await this.page.locator('button.btn_secondary.cart_button').first()
+        await this.page.click('button.btn_secondary.cart_button');
+        await expect(this.page.getByText('Sauce Labs Fleece Jacket')).toBeVisible();
+        await this.page.click('a.btn_action.checkout_button');
+        await this.page.waitForURL('https://www.saucedemo.com/v1/checkout-step-one.html');
+    }
+
+    async novoCheckout() {
+        await expect(this.page.url()).toMatch('https://www.saucedemo.com/v1/checkout-step-one.html');
+        await this.page.locator('#first-name').fill('Elen')
+        await this.page.locator('#last-name').fill('Crozara')
+        await this.page.locator('#postal-code').fill('38400644')
+        await this.page.locator('.btn_primary.cart_button').click()
+    }
+
+    async novoPayments() {
+        await expect(this.page.url()).toMatch('https://www.saucedemo.com/v1/checkout-step-two.html');
+        await expect(this.page.getByText('Sauce Labs Fleece Jacket')).toBeVisible();
+        await this.page.getByText('$49.99', { exact: true });
+        await expect(this.page.getByText('SauceCard #31337')).toBeVisible();
+        await expect(this.page.getByText('53.99')).toBeVisible();
+        await this.page.getByRole('link', { name: 'FINISH' }).click()
+        await expect(this.page.url()).toMatch('https://www.saucedemo.com/v1/checkout-complete.html');
+    }
+
 }

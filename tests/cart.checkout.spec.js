@@ -1,12 +1,13 @@
-import { test, context, waitForEvent } from "@playwright/test";
+import { test } from "@playwright/test";
 import { CartPage } from "../support/cart.index";
 
 
-test.describe('cart test', async () => {
+test.describe('testing cart', async () => {
 
 
-    test('adding product to cart', async ({ page }) => {
+    test('complete cart flow', async ({ page }) => {
         const cartPage = new CartPage(page)
+
         await cartPage.login()
         await page.waitForURL('https://www.saucedemo.com/v1/inventory.html')
         await cartPage.selectProduct()
@@ -16,20 +17,20 @@ test.describe('cart test', async () => {
 
     });
 
-    test.only('adding new product', async ({ page }) => {
+    test.only('adding and remove products', async ({ page }) => {
         const cartPage = new CartPage(page)
+
         await cartPage.login()
-        await page.waitForURL('https://www.saucedemo.com/v1/inventory.html')
         await cartPage.selectProduct()
         await cartPage.accessingCart()
         await cartPage.continueShopping()
-
-      
+        await cartPage.removeProductCart()
+        await cartPage.novoCheckout()
+        await cartPage.novoPayments()
 
     })
 
-    // criar arquivo para testar cart.continue quando o usuário insere o produto no carrinho e 
-    // retorna para comprar mais
+    
     // inserir dados fakes no checkout
 })
 
