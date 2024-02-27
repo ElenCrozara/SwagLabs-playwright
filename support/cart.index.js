@@ -7,6 +7,8 @@ exports.CartPage = class CartPage {
 
     constructor(page) {
         this.page = page
+
+
     }
 
     async login() {
@@ -41,7 +43,6 @@ exports.CartPage = class CartPage {
         await this.page.getByText('$29.99', { exact: true });
         await this.page.waitForSelector('a.btn_action.checkout_button');
         await this.page.click('a.btn_action.checkout_button');
-        // await page.dispatchEvent('a.btn_action.checkout_button', 'click');
         await this.page.waitForURL('https://www.saucedemo.com/v1/checkout-step-one.html');
     }
 
@@ -52,7 +53,7 @@ exports.CartPage = class CartPage {
         await this.page.locator('#postal-code').fill('38400644')
         await this.page.locator('.btn_primary.cart_button').click()
     }
-    
+
     async payments() {
         await expect(this.page.url()).toMatch('https://www.saucedemo.com/v1/checkout-step-two.html');
         await expect(this.page.getByText('Sauce Labs Backpack')).toBeVisible();
@@ -68,10 +69,19 @@ exports.CartPage = class CartPage {
         await this.page.waitForSelector('#shopping_cart_container > a');
         await this.page.click('#shopping_cart_container > a');
         await expect(this.page.url()).toMatch('https://www.saucedemo.com/v1/cart.html');
+
         // clicando no botão CONTINUE SHOPPING
         await this.page.waitForSelector('a.btn_secondary')
         await this.page.click('a.btn_secondary')
-        await expect(this.page.url()).toMatch('https://www.saucedemo.com/v1/inventory.html');
-        
+        await expect(this.page.url()).toMatch('https://www.saucedemo.com/v1/inventory.html')
+        await this.page.getByRole('link', { name: 'Sauce Labs Fleece Jacket' }).click({ force: true })
+
+        // acessa a página do novo produto
+        await expect(this.page.url()).toMatch('https://www.saucedemo.com/v1/inventory-item.html?id=5');
+        await this.page.locator('//*[contains(text(),"Sauce Labs Fleece Jacket")]').isVisible();
+        await this.page.getByText('$49.99', { exact: true });
+
+        // clicando no botão ADD TO CART para adicionar um produto no carrinho
+        await this.page.dispatchEvent('.btn_primary.btn_inventory', 'click');
     }
 }

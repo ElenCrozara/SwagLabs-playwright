@@ -1,8 +1,9 @@
-import { test } from "@playwright/test";
+import { test, context, waitForEvent } from "@playwright/test";
 import { CartPage } from "../support/cart.index";
 
 
 test.describe('cart test', async () => {
+
 
     test('adding product to cart', async ({ page }) => {
         const cartPage = new CartPage(page)
@@ -15,7 +16,7 @@ test.describe('cart test', async () => {
 
     });
 
-    test('adding new product', async ({ page }) => {
+    test.only('adding new product', async ({ page }) => {
         const cartPage = new CartPage(page)
         await cartPage.login()
         await page.waitForURL('https://www.saucedemo.com/v1/inventory.html')
@@ -23,6 +24,7 @@ test.describe('cart test', async () => {
         await cartPage.accessingCart()
         await cartPage.continueShopping()
 
+      
 
     })
 
