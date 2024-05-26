@@ -4,9 +4,6 @@ import { ProductsPage } from "../support/products.index";
 
 
 
-
-
-
 let browserContext;
 let page;
 let productsPage;
@@ -17,7 +14,7 @@ test.describe('products test', () => {
         page = await browserContext.newPage();
         productsPage = new ProductsPage(page);
         await productsPage.login();
-        console.log('Before tests');
+       
     });
 
     test('all product names begin with "Sauce Labs"', async ({ page }) => {

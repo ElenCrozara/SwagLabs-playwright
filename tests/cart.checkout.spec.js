@@ -13,7 +13,7 @@ test.describe('testing cart', async () => {
         page = await browserContext.newPage();
         cartPage = new CartPage(page);
         await cartPage.login();
-        console.log('Before tests');
+        
     });
 
     test('complete cart flow', async ({ page }) => {
