@@ -16,6 +16,7 @@ exports.CartPage = class CartPage {
         await this.page.locator('#user-name').fill('standard_user')
         await this.page.locator('#password').fill('secret_sauce')
         await this.page.locator('#login-button').click()
+        await this.page.waitForURL('https://www.saucedemo.com/v1/inventory.html')
     }
 
     async selectProduct() {

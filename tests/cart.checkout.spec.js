@@ -2,14 +2,21 @@ import { test } from "@playwright/test";
 import { CartPage } from "../support/cart.index";
 
 
-test.describe('testing cart', async () => {
+let browserContext;
+let page;
+let cartPage;
 
+test.describe('testing cart', async () => {
+    
+    test.beforeAll(async ({ browser }) => {
+        browserContext = await browser.newContext();
+        page = await browserContext.newPage();
+        cartPage = new CartPage(page);
+        await cartPage.login();
+        console.log('Before tests');
+    });
 
     test('complete cart flow', async ({ page }) => {
-        const cartPage = new CartPage(page)
-
-        await cartPage.login()
-        await page.waitForURL('https://www.saucedemo.com/v1/inventory.html')
         await cartPage.selectProduct()
         await cartPage.accessingCart()
         await cartPage.checkout()
@@ -17,10 +24,7 @@ test.describe('testing cart', async () => {
 
     });
 
-    test.only('adding and remove products', async ({ page }) => {
-        const cartPage = new CartPage(page)
-
-        await cartPage.login()
+    test('adding and remove products', async ({ page }) => {
         await cartPage.selectProduct()
         await cartPage.accessingCart()
         await cartPage.continueShopping()
