@@ -1,12 +1,11 @@
 import { expect } from '@playwright/test'
+import { Page } from '@playwright/test'
 
+export class ProductsPage {
 
-exports.ProductsPage = class ProductsPage {
-
-    /** @param {import('@playwright/test').Page} page */
-
-    constructor(page) {
-        this.page = page
+    readonly page: Page;
+    constructor(page: Page) {
+        this.page = page;
     }
 
     async login() {
@@ -18,7 +17,7 @@ exports.ProductsPage = class ProductsPage {
     }
 
     async verificationProduct() {
-        const titleListLocator = await this.page.locator('.inventory_item_name');
+        const titleListLocator = this.page.locator('.inventory_item_name');
         // guarda o conteúdo dos textos dos produtos (allTextContents)
         const productTitleList = await titleListLocator.allTextContents();
         // loop para validar se todos os itens começam com "Sauce Labs"
@@ -29,12 +28,12 @@ exports.ProductsPage = class ProductsPage {
 
     async validatingInventory() {
         // localizou a class que referencia os 6 elementos da lista
-        const inventory = await this.page.locator('.inventory_item_name')
+        const inventory = this.page.locator('.inventory_item_name')
         // guarda o conteúdo do texto na constante
         const inventoryListProducts = await inventory.allTextContents()
         // loop para verificar se o tamanho da lista corresponde a 6 produtos
-        for (const item of inventoryListProducts)
-            await expect(inventoryListProducts.length).toBe(6)
+        // for (const inventory of inventoryListProducts)
+        await expect(inventoryListProducts.length).toBe(6)
     }
 
 }

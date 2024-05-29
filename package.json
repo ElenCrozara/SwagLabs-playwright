@@ -4,11 +4,20 @@
   "description": "Testando um e-commerce",
   "main": "index.js",
   "scripts": {
-    "test": "npx playwright test" 
+    "test": "npx playwright test",
+    "ui": "npx playwright test --ui",
+    "debug": "npx playwright test --debug"
   },
   "author": "Elen Crozara",
   "license": "MIT",
   "devDependencies": {
-    "@playwright/test": "^1.36.1"
+    "@playwright/test": "^1.36.1",
+    "@types/node": "^18.18.1",
+    "@typescript-eslint/eslint-plugin": "^6.7.0",
+    "@typescript-eslint/parser": "^6.7.0",
+    "eslint": "^8.49.0",
+    "eslint-plugin-playwright": "^0.16.0",
+    "prettier": "^3.1.0",
+    "typescript": "^5.4.5"
   }
 }

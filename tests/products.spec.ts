@@ -1,9 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { ProductsPage } from "../support/products.index";
 
-
-
-
 let browserContext;
 let page;
 let productsPage;
@@ -17,14 +14,18 @@ test.describe('products test', () => {
        
     });
 
+    test.use({
+        viewport: { width: 1920, height: 1080 },
+      });
+      
     test('all product names begin with "Sauce Labs"', async ({ page }) => {
         test.fail()
-        await expect(await page.url()).toBe('https://www.saucedemo.com/v1/inventory.html')
+        await expect(page.url()).toBe('https://www.saucedemo.com/v1/inventory.html')
         await productsPage.verificationProduct()
 
     });
 
-    test('inventory products', async ({ page }) => {
+    test('inventory products', async () => {
         await productsPage.validatingInventory()
     })
     // criar mais testes para essa página

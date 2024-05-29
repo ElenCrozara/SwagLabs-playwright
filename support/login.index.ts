@@ -1,10 +1,8 @@
-import { page, expect } from '@playwright/test'
+import { Page, expect } from '@playwright/test'
 
+export class LoginPage {
 
-exports.LoginPage = class LoginPage {
-
-    /** @param {import('@playwright/test').Page} page */
-    
+    readonly page: Page;
     constructor(page) {
         this.page = page
     }

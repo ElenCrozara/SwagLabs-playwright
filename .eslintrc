@@ -13,7 +13,7 @@
         "plugin:@typescript-eslint/recommended"
     ],
     "rules": {
-        "indent": ["error", 4],
+        // "indent": ["error", 4],
         "no-multi-spaces": ["error"],
         "no-multiple-empty-lines": ["error", { "max": 1}]
     }

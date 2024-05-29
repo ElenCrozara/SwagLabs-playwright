@@ -20,7 +20,7 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined, // ao rodar no CI vai abrir apenas 1 browser, quando estiver fora está indefinifo
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'list',
+  reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     headless: true, // não vai testar via terminal, true habilita via terminal
@@ -28,7 +28,7 @@ export default defineConfig({
     // baseURL: 'http://127.0.0.1:3000',
     actionTimeout: 0,
     launchOptions: {
-      slowMo: 300 // vai executar cada teste com 300 milisegundos (mais devagar)
+      slowMo: 1000 // vai executar cada teste com 300 milisegundos (mais devagar)
     },
     video: 'off', //habilita a gravação de vídeo
     screenshot: 'only-on-failure', // vai tirar screenshot somente quando falhar o teste
