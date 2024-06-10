@@ -37,18 +37,6 @@ Para rodar todos os testes:
     
    npm run debug
    
-🌟 Estrutura do Projeto
-
-swaglabs-playwright/
-├── tests/                   # Contém os testes Playwright
-│   ├── example.spec.ts      # Exemplo de um teste
-├── .eslintrc.js             # Configuração do ESLint
-├── .prettierrc              # Configuração do Prettier
-├── package.json             # Configurações do NPM e scripts
-├── playwright.config.ts     # Configuração do Playwright
-├── tsconfig.json            # Configuração do TypeScript
-└── README.md                # Este arquivo!
-
 
 🌟 Contribuições são super bem-vindas! Aqui estão algumas maneiras pelas quais você pode contribuir:
 
