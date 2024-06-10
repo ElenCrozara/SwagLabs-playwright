@@ -1,9 +1,10 @@
-Swaglabs Playwright Automation Project
+
 🎉 Bem-vindo ao Projeto de Automação de UI com Playwright! 🎉
 
 Este projeto, swaglabs-playwright, é dedicado a testar um e-commerce fake utilizando a poderosa ferramenta de automação de testes, Playwright, visa proporcionar uma automação eficiente e fácil de manter.
 
 📋 Descrição do Projeto
+
 Informações Gerais
 Nome: swaglabs-playwright
 Versão: 1.0.0
