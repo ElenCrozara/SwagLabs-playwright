@@ -17,6 +17,7 @@ test.describe("testing cart", async () => {
     viewport: { width: 1920, height: 1080 },
   });
 
+  // eslint-disable-next-line playwright/expect-expect
   test("complete cart flow", async () => {
     await cartPage.selectProduct();
     await cartPage.accessingCart();
@@ -24,6 +25,7 @@ test.describe("testing cart", async () => {
     await cartPage.payments();
   });
 
+  // eslint-disable-next-line playwright/expect-expect
   test("adding and remove products", async () => {
     await cartPage.selectProduct();
     await cartPage.accessingCart();
@@ -32,5 +34,5 @@ test.describe("testing cart", async () => {
     await cartPage.novoCheckout();
     await cartPage.novoPayments();
   });
-  // inserir dados fakes no checkout
+  
 });

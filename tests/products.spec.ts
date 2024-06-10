@@ -25,9 +25,11 @@ test.describe('products test', () => {
 
     });
 
+    // eslint-disable-next-line playwright/expect-expect
     test('inventory products', async () => {
         await productsPage.validatingInventory()
     })
+    
     // criar mais testes para essa página
     //.cart_cancel_link.btn_secondary // CANCEL
 })
