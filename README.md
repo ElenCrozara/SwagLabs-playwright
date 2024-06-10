@@ -17,7 +17,7 @@ Passos para Configuração:
 1. Clone o Repositório
    
    git clone https://github.com/seuusuario/swaglabs-playwright.git
-   cd swaglabs-playwright
+   
    
 3. Instale as dependências
 
