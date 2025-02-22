@@ -1,0 +1,20 @@
+name: Testes com Playwright
+
+on:
+  push:
+    branches: [main] # Executa o workflow em cada push na branch 'main'
+  pull_request:
+    branches: [main] # Executa o workflow em cada pull request na branch 'main'
+
+jobs:
+  testes:
+    runs-on: ubuntu-latest # Executa o workflow em um ambiente Ubuntu
+
+    steps:
+      - uses: actions/checkout@v3 # Clona o repositório
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16 # Ou a versão do Node.js que você utiliza
+      - run: npm install # Instala as dependências do projeto
+      - run: npx playwright install # Instala o Playwright e os browsers
+      - run: npm run test # Executa os testes do Playwright
