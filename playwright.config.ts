@@ -20,8 +20,8 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined, // ao rodar no CI vai abrir apenas 1 browser, quando estiver fora está indefinifo
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
-  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+  reporter: "allure-playwright",
+   // html e outros tipos
   use: {
     headless: true, // não vai testar via terminal, true habilita via terminal
     /* Base URL to use in actions like `await page.goto('/')`. */
