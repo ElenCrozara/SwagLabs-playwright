@@ -18,16 +18,12 @@ jobs:
       - run: npm install 
       - run: npx playwright install 
       - run: npm run test 
-      - run: npx allure generate ./allure-results --clean 
-      - uses: actions/upload-artifact@v4 
-        with:
-          name: allure-report
-          path: ./allure-results
-      - name: Gera relatório Allure
-        run: npx allure generate ./allure-results --clean
+      # - run: npx allure generate ./allure-results --clean 
+      # - uses: actions/upload-artifact@v4 
+      #   with:
+      #     name: allure-report
+      #     path: ./allure-results
+      # - name: Gera relatório Allure
+      #   run: npx allure generate ./allure-results --clean
 
-      - name: Publica relatório no GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./allure-results
+      
