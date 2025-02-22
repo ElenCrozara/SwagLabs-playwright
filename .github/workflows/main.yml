@@ -17,4 +17,4 @@ jobs:
           node-version: 16 # Ou a versão do Node.js que você utiliza
       - run: npm install # Instala as dependências do projeto
       - run: npx playwright install # Instala o Playwright e os browsers
-      - run: npx playwright test # Executa os testes do Playwright
+      - run: npm run test # Executa os testes do Playwright
