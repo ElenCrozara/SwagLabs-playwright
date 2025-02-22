@@ -4,22 +4,30 @@ on:
   push:
     branches: [main] # Executa o workflow em cada push na branch 'main'
   pull_request:
-    branches: [main] # Executa o workflow em cada pull request na branch 'main'
+    branches: [main] 
 
 jobs:
   testes:
-    runs-on: ubuntu-latest # Executa o workflow em um ambiente Ubuntu
+    runs-on: ubuntu-latest 
 
     steps:
       - uses: actions/checkout@v3 # Clona o repositório
       - uses: actions/setup-node@v3
         with:
-          node-version: 16 # Ou a versão do Node.js que você utiliza
-      - run: npm install # Instala as dependências do projeto
-      - run: npx playwright install # Instala o Playwright e os browsers
-      - run: npm run test # Executa os testes do Playwright
-      - run: npx allure generate ./allure-results --clean # Gera o relatório Allure
-      - uses: actions/upload-artifact@v4 # Envia o relatório como artefato para o runner
+          node-version: 16 
+      - run: npm install 
+      - run: npx playwright install 
+      - run: npm run test 
+      - run: npx allure generate ./allure-results --clean 
+      - uses: actions/upload-artifact@v4 
         with:
           name: allure-report
           path: ./allure-results
+      - name: Gera relatório Allure
+        run: npx allure generate ./allure-results --clean
+
+      - name: Publica relatório no GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          # github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./allure-results
