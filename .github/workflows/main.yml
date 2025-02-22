@@ -18,3 +18,8 @@ jobs:
       - run: npm install # Instala as dependências do projeto
       - run: npx playwright install # Instala o Playwright e os browsers
       - run: npm run test # Executa os testes do Playwright
+      - run: npx allure generate ./allure-results --clean # Gera o relatório Allure
+      - uses: actions/upload-artifact@v3 # Envia o relatório como artefato
+        with:
+          name: allure-report
+          path: ./allure-results
