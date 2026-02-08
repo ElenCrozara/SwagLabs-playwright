@@ -24,8 +24,7 @@ export default defineConfig({
    // html e outros tipos
   use: {
     headless: true, // não vai testar via terminal, true habilita via terminal
-    /* Base URL to use in actions like `await page.goto('/')`. */
-    // baseURL: 'http://127.0.0.1:3000',
+    baseURL: process.env.BASE_URL || 'https://www.saucedemo.com/v1',
     actionTimeout: 0,
     launchOptions: {
       slowMo: 1000 // vai executar cada teste com 300 milisegundos (mais devagar)

@@ -1,5 +1,6 @@
 import { expect } from "@playwright/test";
 import { Page } from "@playwright/test";
+import { credentials, checkoutData } from "./fixtures";
 
 export class CartPage {
   readonly page: Page;
@@ -8,12 +9,12 @@ export class CartPage {
   }
 
   async login() {
-    await this.page.goto("https://www.saucedemo.com/v1/index.html");
+    await this.page.goto("/index.html");
     await expect(await this.page.title()).toBe("Swag Labs");
-    await this.page.locator("#user-name").fill("standard_user");
-    await this.page.locator("#password").fill("secret_sauce");
+    await this.page.locator("#user-name").fill(credentials.username);
+    await this.page.locator("#password").fill(credentials.password);
     await this.page.locator("#login-button").click();
-    await this.page.waitForURL("https://www.saucedemo.com/v1/inventory.html");
+    await this.page.waitForURL(/\/inventory\.html/);
   }
 
   async selectProduct() {
@@ -23,9 +24,7 @@ export class CartPage {
     // Localiza a classe do primeiro produto da lista e clica
     this.page.locator(".inventory_item_name").nth(0);
     await this.page.dispatchEvent(".inventory_item_name", "click");
-    await this.page.waitForURL(
-      "https://www.saucedemo.com/v1/inventory-item.html?id=4"
-    );
+    await this.page.waitForURL(/\/inventory-item\.html\?id=4/);
     await this.page
       .locator('//*[contains(text(),"Sauce Labs Backpac")]')
       .isVisible();
@@ -37,64 +36,48 @@ export class CartPage {
   async accessingCart() {
     await this.page.waitForSelector("#shopping_cart_container > a");
     await this.page.click("#shopping_cart_container > a");
-    await expect(this.page.url()).toMatch(
-      "https://www.saucedemo.com/v1/cart.html"
-    );
+    await expect(this.page.url()).toMatch(/\/cart\.html/);
     await expect(this.page.getByText("Sauce Labs Backpack")).toBeVisible();
     this.page.getByText("$29.99", { exact: true });
     await this.page.waitForSelector("a.btn_action.checkout_button");
     await this.page.click("a.btn_action.checkout_button");
-    await this.page.waitForURL(
-      "https://www.saucedemo.com/v1/checkout-step-one.html"
-    );
+    await this.page.waitForURL(/\/checkout-step-one\.html/);
   }
 
   async checkout() {
-    await expect(this.page.url()).toMatch(
-      "https://www.saucedemo.com/v1/checkout-step-one.html"
-    );
-    await this.page.locator("#first-name").fill("Elen");
-    await this.page.locator("#last-name").fill("Crozara");
-    await this.page.locator("#postal-code").fill("38400644");
+    await expect(this.page.url()).toMatch(/\/checkout-step-one\.html/);
+    await this.page.locator("#first-name").fill(checkoutData.firstName);
+    await this.page.locator("#last-name").fill(checkoutData.lastName);
+    await this.page.locator("#postal-code").fill(checkoutData.postalCode);
     await this.page.locator(".btn_primary.cart_button").click();
   }
 
   async payments() {
-    await expect(this.page.url()).toMatch(
-      "https://www.saucedemo.com/v1/checkout-step-two.html"
-    );
+    await expect(this.page.url()).toMatch(/\/checkout-step-two\.html/);
     await expect(this.page.getByText("Sauce Labs Backpack")).toBeVisible();
     this.page.getByText("$29.99", { exact: true });
     await expect(this.page.getByText("SauceCard #31337")).toBeVisible();
     await expect(this.page.getByText("32.39")).toBeVisible();
     await this.page.getByRole("link", { name: "FINISH" }).click();
-    await expect(this.page.url()).toMatch(
-      "https://www.saucedemo.com/v1/checkout-complete.html"
-    );
+    await expect(this.page.url()).toMatch(/\/checkout-complete\.html/);
   }
 
   async continueShopping() {
     // clica no carrinho
     await this.page.waitForSelector("#shopping_cart_container > a");
     await this.page.click("#shopping_cart_container > a");
-    await expect(this.page.url()).toMatch(
-      "https://www.saucedemo.com/v1/cart.html"
-    );
+    await expect(this.page.url()).toMatch(/\/cart\.html/);
 
     // clicando no botão CONTINUE SHOPPING
     await this.page.waitForSelector("a.btn_secondary");
     await this.page.click("a.btn_secondary");
-    await expect(this.page.url()).toMatch(
-      "https://www.saucedemo.com/v1/inventory.html"
-    );
+    await expect(this.page.url()).toMatch(/\/inventory\.html/);
     await this.page
       .getByRole("link", { name: "Sauce Labs Fleece Jacket" })
       .click();
 
     // acessa a página do novo produto
-    await expect(this.page.url()).toMatch(
-      "https://www.saucedemo.com/v1/inventory-item.html?id=5"
-    );
+    await expect(this.page.url()).toMatch(/\/inventory-item\.html\?id=5/);
     await this.page
       .locator('//*[contains(text(),"Sauce Labs Fleece Jacket")]')
       .isVisible();
@@ -108,9 +91,7 @@ export class CartPage {
     // clica no carrinho
     await this.page.waitForSelector("#shopping_cart_container > a");
     await this.page.click("#shopping_cart_container > a");
-    await expect(this.page.url()).toMatch(
-      "https://www.saucedemo.com/v1/cart.html"
-    );
+    await expect(this.page.url()).toMatch(/\/cart\.html/);
     await this.page.waitForSelector(".inventory_item_name");
 
     // Obter os 2 elementos correspondentes ao locator
@@ -122,23 +103,16 @@ export class CartPage {
     await this.page.click("button.btn_secondary.cart_button");
     await expect(this.page.getByText("Sauce Labs Fleece Jacket")).toBeVisible();
     await this.page.click("a.btn_action.checkout_button");
-    await this.page.waitForURL(
-      "https://www.saucedemo.com/v1/checkout-step-one.html"
-    );
+    await this.page.waitForURL(/\/checkout-step-one\.html/);
   }
 
   async novoCheckout() {
-    await expect(this.page.url()).toMatch(
-      "https://www.saucedemo.com/v1/checkout-step-one.html"
-    );
-    await this.page.locator("#first-name").fill("Elen");
-    await this.page.locator("#last-name").fill("Crozara");
-    await this.page.locator("#postal-code").fill("38400644");
-    // await this.page.dispatchEvent('.btn_primary cart_button','click')
+    await expect(this.page.url()).toMatch(/\/checkout-step-one\.html/);
+    await this.page.locator("#first-name").fill(checkoutData.firstName);
+    await this.page.locator("#last-name").fill(checkoutData.lastName);
+    await this.page.locator("#postal-code").fill(checkoutData.postalCode);
     await this.page.getByRole("button", { name: "CONTINUE" }).click();
-    await expect(this.page.url()).toMatch(
-      "https://www.saucedemo.com/v1/checkout-step-two.html"
-    );
+    await expect(this.page.url()).toMatch(/\/checkout-step-two\.html/);
   }
 
   async novoPayments() {
@@ -147,8 +121,6 @@ export class CartPage {
     await expect(this.page.getByText("SauceCard #31337")).toBeVisible();
     await expect(this.page.getByText("53.99")).toBeVisible();
     await this.page.getByRole("link", { name: "FINISH" }).click();
-    await expect(this.page.url()).toMatch(
-      "https://www.saucedemo.com/v1/checkout-complete.html"
-    );
+    await expect(this.page.url()).toMatch(/\/checkout-complete\.html/);
   }
 }

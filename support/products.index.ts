@@ -1,5 +1,6 @@
 import { expect } from '@playwright/test'
 import { Page } from '@playwright/test'
+import { credentials } from './fixtures'
 
 export class ProductsPage {
 
@@ -9,10 +10,10 @@ export class ProductsPage {
     }
 
     async login() {
-        await this.page.goto('https://www.saucedemo.com/v1/index.html')
+        await this.page.goto('/index.html')
         await expect(await this.page.title()).toBe('Swag Labs')
-        await this.page.locator('#user-name').fill('standard_user')
-        await this.page.locator('#password').fill('secret_sauce')
+        await this.page.locator('#user-name').fill(credentials.username)
+        await this.page.locator('#password').fill(credentials.password)
         await this.page.locator('#login-button').click()
     }
 
