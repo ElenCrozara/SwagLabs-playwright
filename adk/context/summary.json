@@ -1,0 +1,37 @@
+{
+  "analyzedAt": "2025-02-08",
+  "projectType": "e2e-tests",
+  "stack": {
+    "runtime": "Node.js",
+    "language": "TypeScript",
+    "testFramework": "@playwright/test",
+    "linter": "ESLint",
+    "formatter": "Prettier",
+    "reporter": "allure-playwright"
+  },
+  "structure": {
+    "supportDir": "support",
+    "testDir": "tests",
+    "pageObjectPattern": true,
+    "supportFiles": ["login.index.ts", "products.index.ts", "cart.index.ts"],
+    "specFiles": ["login.spec.ts", "products.spec.ts", "cart.checkout.spec.ts"]
+  },
+  "targetApp": {
+    "description": "Sauce Demo (Swag Labs) - e-commerce demo",
+    "baseUrl": "https://www.saucedemo.com/v1/",
+    "external": true
+  },
+  "stats": {
+    "supportFiles": 3,
+    "specFiles": 3,
+    "pageObjectClasses": 3,
+    "configFiles": ["playwright.config.ts", ".eslintrc"]
+  },
+  "warnings": [
+    "Credenciais e dados de checkout hardcoded nos page objects",
+    "login.index.ts: constructor(page) sem tipo explícito para page",
+    "products.spec.ts contém test.fail() em um dos testes",
+    "Não há tsconfig.json na raiz",
+    "URLs base hardcoded; baseURL do Playwright não utilizada"
+  ]
+}

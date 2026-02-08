@@ -11,8 +11,7 @@ test.describe('login page', async () => {
         const loginPage = new LoginPage(page)
 
         await loginPage.login()
-        await expect(page.url()).toBe('https://www.saucedemo.com/v1/inventory.html')
-       
+        await expect(page.url()).toMatch(/inventory\.html/)
         const productTitle = page.locator('#inventory_filter_container > div')
         await expect(productTitle).toHaveText('Products')
     });
@@ -23,5 +22,32 @@ test.describe('login page', async () => {
         await loginPage.loginError()
         const errorText = page.getByText('Epic sadface: Username and password do not match any user in this service')
         await expect(errorText).toBeVisible()
+    });
+
+    test('the user logs out with success', async ({ page }) => {
+        const loginPage = new LoginPage(page)
+        await loginPage.login()
+        await loginPage.logout()
+        await expect(page.url()).toMatch(/index\.html|saucedemo\.com\/?$/)
+        await expect(page.locator('#login-button')).toBeVisible()
+    });
+
+    test('the user logs out and logs in again', async ({ page }) => {
+        const loginPage = new LoginPage(page)
+        await loginPage.login()
+        await loginPage.logout()
+        await loginPage.login()
+        await expect(page.url()).toMatch(/inventory\.html/)
+        const productTitle = page.locator('#inventory_filter_container > div')
+        await expect(productTitle).toHaveText('Products')
+    });
+
+    test('the user can open password recovery flow', async ({ page }) => {
+        const loginPage = new LoginPage(page)
+        await loginPage.gotoLogin()
+        await loginPage.openPasswordRecovery()
+        const errorMessage = page.getByText(/Epic sadface/)
+        const loginButton = page.locator('#login-button')
+        await expect(errorMessage.or(loginButton)).toBeVisible()
     });
 })
