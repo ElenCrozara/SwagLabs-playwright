@@ -5,6 +5,8 @@ let browserContext;
 let page;
 let cartPage;
 
+// projeto no github
+
 test.describe("testing cart", async () => {
   test.beforeAll(async ({ browser }) => {
     browserContext = await browser.newContext();
